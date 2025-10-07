@@ -12,6 +12,22 @@ function db() {
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
+    run_migrations($pdo);
   }
   return $pdo;
+}
+
+function run_migrations($pdo) {
+    $pdo->exec("CREATE TABLE IF NOT EXISTS migrations (migration VARCHAR(255) PRIMARY KEY)");
+    $applied_migrations = $pdo->query("SELECT migration FROM migrations")->fetchAll(PDO::FETCH_COLUMN);
+
+    $migration_files = glob(__DIR__ . '/migrations/*.sql');
+    foreach ($migration_files as $file) {
+        $migration_name = basename($file);
+        if (!in_array($migration_name, $applied_migrations)) {
+            $sql = file_get_contents($file);
+            $pdo->exec($sql);
+            $pdo->prepare("INSERT INTO migrations (migration) VALUES (?)")->execute([$migration_name]);
+        }
+    }
 }

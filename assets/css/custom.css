@@ -1,0 +1,45 @@
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #ecf0f1;
+    color: #34495e;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', serif;
+}
+
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hero {
+    background: linear-gradient(to right, #3498db, #2980b9);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-secondary {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.form-control {
+    border-radius: 4px;
+}
