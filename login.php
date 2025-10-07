@@ -14,7 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_role'] = $user['role'];
-        header("Location: dashboard.php");
+        if ($user['role'] == 'donor') {
+            header("Location: donor_dashboard.php");
+        } elseif ($user['role'] == 'ngo') {
+            header("Location: ngo_dashboard.php");
+        } else {
+            header("Location: dashboard.php"); // Fallback for other roles
+        }
         exit;
     } else {
         $error = "Invalid credentials";

@@ -24,7 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($stmt->execute([$email, $hashed_password, $role])) {
                 $_SESSION['user_id'] = $pdo->lastInsertId();
                 $_SESSION['user_role'] = $role;
-                header("Location: dashboard.php");
+                if ($role == 'donor') {
+                    header("Location: donor_dashboard.php");
+                } elseif ($role == 'ngo') {
+                    header("Location: ngo_dashboard.php");
+                } else {
+                    header("Location: dashboard.php");
+                }
                 exit;
             } else {
                 $error = "Registration failed";
