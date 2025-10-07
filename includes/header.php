@@ -38,11 +38,18 @@
                     <a class="nav-link" href="index.php#contact">Contact</a>
                 </li>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-primary ms-2" href="<?php echo $_SESSION['user_role']; ?>_dashboard.php">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary ms-2" href="logout.php">Logout</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            My Account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="<?php echo $_SESSION['user_role']; ?>_dashboard.php">Dashboard</a></li>
+                            <?php if ($_SESSION['user_role'] === 'donor'): ?>
+                                <li><a class="dropdown-item" href="donor_profile.php">My Profile</a></li>
+                            <?php endif; ?>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        </ul>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
